@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { deletePending } from "../store/action"
-
+import style from "./ButtonDelete.module.css"
 const ButtonDelete = ({id}) =>{
 
     const dispatch = useDispatch()
@@ -8,8 +8,8 @@ const ButtonDelete = ({id}) =>{
         dispatch(deletePending(id))
     }
     return(
-        <div>
-            <button onClick={onClick}>delete</button>
+        <div className={style.container }>
+            <button onClick={onClick} type="button" class="btn btn-danger">Delete</button>
         </div>
     )
 }

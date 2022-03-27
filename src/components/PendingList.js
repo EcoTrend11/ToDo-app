@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux"
 import ButtonCompleted from "./ButtonCompleted"
 import ButtonDelete from "./ButtonDelete"
+import NoPending from "./NoPending"
+import style from "./PendingList.module.css"
+
 
 const PendingList = () =>{
 
@@ -10,7 +13,7 @@ const PendingList = () =>{
    if(!value){
        return(
            <div>
-               no hay pending
+               <NoPending/>
            </div>
        )
    }
@@ -30,8 +33,8 @@ const PendingList = () =>{
                     <>
                     <tr>
                         <th scope="row">{index+1}</th>
-                        <td>{e.value}</td>
-                        <td><ButtonCompleted value={e.value} id={e.id}/><ButtonDelete id={e.id}/></td>
+                        <td className={style.nameContainer} >{e.value}</td>
+                        <td className={style.buttonContainer}><ButtonCompleted value={e.value} id={e.id}/><ButtonDelete id={e.id}/></td>
                     </tr>
                     </>
                 )}

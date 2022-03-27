@@ -1,4 +1,8 @@
 import { useSelector } from "react-redux"
+import ButtonDeleteHtr from "./ButtonDeleteHtr"
+import ButtonIncompleHts from "./ButtonImcompleHts"
+import style from "./History.module.css"
+import NoHistory from "./NoHistory"
 
 const History = ({show}) =>{
     
@@ -9,7 +13,7 @@ const History = ({show}) =>{
     
 
     if(!show){return(<></>)}
-    if(!value){return<div>NO HISTORY</div>}
+    if(!value){return<div><NoHistory/></div>}
     return(
         <div>   
             <table class="table table-striped">
@@ -25,8 +29,8 @@ const History = ({show}) =>{
                     <>
                     <tr>
                         <th scope="row">{index+1}</th>
-                        <td>{e.value}</td>
-                        <td><button>imcolpleto</button><button>delete</button></td>
+                        <td className={style.nameContainer} >{e.value}</td>
+                        <td className={style.buttonContainer} ><ButtonIncompleHts value={e.value} id={e.id}/><ButtonDeleteHtr id={e.id}/></td>
                     </tr>
                     </>
                 )}

@@ -1,4 +1,4 @@
-import { CREATE_PENDING } from "../action/constanst"
+import { COMPLETE_PENDING, CREATE_PENDING, DELETE_PENDING } from "../action/constanst"
 
 const initialState = {
     pending:[],
@@ -12,7 +12,6 @@ function reducer ( state = initialState, action ){
             return{
                 ...state,
                 pending : [value],
-                valor :value
             }
         }
         if(state.pending){
@@ -22,6 +21,37 @@ function reducer ( state = initialState, action ){
                 ...state,
                 pending : newPending
             }
+        }
+
+    }
+    if( action.type === COMPLETE_PENDING){
+        let id = action.payload.id
+        let payload = action.payload
+        let pendingList= [...state.pending]
+        let filter = pendingList.filter(e => e.id !== id)
+        if(!state.pendingHistory){
+            return{
+                ...state,
+                pending: filter,
+                pendingHistory : [payload]
+            }
+        }
+        if(state.pendingHistory){
+            let newPendingHistory = state.pendingHistory.concat(payload)
+            return{
+                ...state,
+                pending : filter,
+                pendingHistory : newPendingHistory
+            }
+        }
+    }
+    if( action.type === DELETE_PENDING){
+        let id = action.payload
+        let pendingList =[ ...state.pending]
+        let filter = pendingList.filter(e => e.id !== id)
+        return{
+            ...state,
+            pending : filter
         }
     }
     return{

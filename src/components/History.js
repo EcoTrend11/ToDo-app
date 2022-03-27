@@ -1,21 +1,17 @@
 import { useSelector } from "react-redux"
-import ButtonCompleted from "./ButtonCompleted"
-import ButtonDelete from "./ButtonDelete"
 
-const PendingList = () =>{
-
+const History = ({show}) =>{
+    
+    
     let value = useSelector(function(state){
-        return state.pending
+        return state.pendingHistory
     })
-   if(!value){
-       return(
-           <div>
-               no hay pending
-           </div>
-       )
-   }
+    
+
+    if(!show){return(<></>)}
+    if(!value){return<div>NO HISTORY</div>}
     return(
-        <div>
+        <div>   
             <table class="table table-striped">
             <thead>
                 <tr>
@@ -25,20 +21,20 @@ const PendingList = () =>{
                 </tr>
             </thead>
             <tbody>
-                {value.map((e,index) =>
-                
+                {value.map((e,index) =>                
                     <>
                     <tr>
                         <th scope="row">{index+1}</th>
                         <td>{e.value}</td>
-                        <td><ButtonCompleted value={e.value} id={e.id}/><ButtonDelete id={e.id}/></td>
+                        <td><button>imcolpleto</button><button>delete</button></td>
                     </tr>
                     </>
                 )}
             </tbody>
             </table>
-        </div>
+    </div>
+
     )
 }
 
-export default PendingList
+export default History

@@ -4,7 +4,7 @@ import { cretePending } from "../store/action"
 
 
 const Nav = () =>{
-
+    const [id, setId] = useState(1)
     const [value ,setValue] =useState()
     const dispatch = useDispatch()
 
@@ -14,9 +14,12 @@ const Nav = () =>{
     }
 
     function onSubmit (e){
+        console.log(id)
         e.preventDefault();
-        dispatch(cretePending(value))
-        setValue("")
+        dispatch(cretePending(value , id));
+        setValue("");
+        setId(id +1)
+
     } 
 
     return(
